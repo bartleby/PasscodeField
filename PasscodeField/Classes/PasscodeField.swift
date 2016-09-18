@@ -8,41 +8,41 @@
 
 import UIKit
 
-@IBDesignable public class PasscodeField: UIView {
+@IBDesignable open class PasscodeField: UIView {
     
     // MARK: - Properties
     
-    @IBInspectable public var length: Int = 6 {
+    @IBInspectable open var length: Int = 6 {
         didSet {
             self.progressView.length = self.length
         }
     }
     
-    @IBInspectable public var progress: Int = 0 {
+    @IBInspectable open var progress: Int = 0 {
         didSet {
             self.progressView.progress = self.progress
         }
     }
     
-    @IBInspectable public var borderHeight: CGFloat = 2.0 {
+    @IBInspectable open var borderHeight: CGFloat = 2.0 {
         didSet {
             self.progressView.borderHeight = self.borderHeight
         }
     }
     
-    @IBInspectable public var fillColor: UIColor = UIColor.blackColor() {
+    @IBInspectable open var fillColor: UIColor = UIColor.black {
         didSet {
             self.progressView.fillColor = self.fillColor
         }
     }
     
-    @IBInspectable public var fillSize: CGFloat = 20 {
+    @IBInspectable open var fillSize: CGFloat = 20 {
         didSet {
             self.progressView.fillSize = self.fillSize
         }
     }
     
-    private var progressView: ProgressStackView
+    fileprivate var progressView: ProgressStackView
     
     // MARK: - Initializers
     
@@ -76,12 +76,12 @@ import UIKit
     
     // MARK: - LifeCycle
     
-    override public func updateConstraints() {
-        NSLayoutConstraint.activateConstraints([
-            self.progressView.topAnchor.constraintEqualToAnchor(self.topAnchor),
-            self.progressView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor),
-            self.progressView.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor),
-            self.progressView.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor),
+    override open func updateConstraints() {
+        NSLayoutConstraint.activate([
+            self.progressView.topAnchor.constraint(equalTo: self.topAnchor),
+            self.progressView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            self.progressView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.progressView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             ])
         
         super.updateConstraints()
@@ -89,7 +89,7 @@ import UIKit
     
     // MARK: - Private Methods
     
-    private func setupView() {
+    fileprivate func setupView() {
         self.addSubview(progressView)
     }
 

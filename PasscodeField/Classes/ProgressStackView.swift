@@ -64,32 +64,33 @@ final class ProgressStackView: UIStackView {
         self.fillSize = fillSize
         self.fillColor = fillColor
         
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         
         self.commonInit()
         self.setupView()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     // MARK: - Private Methods
 
-    private func commonInit() {
+    fileprivate func commonInit() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.axis = .Horizontal;
-        self.distribution = .EqualSpacing
-        self.alignment = .Center
+        self.axis = .horizontal;
+        self.distribution = .equalSpacing
+        self.alignment = .center
     }
     
-    private func setupView() {
+    fileprivate func setupView() {
         self.refreshCircleView()
     }
     
     // MARK: - Helpers
     
-    private func refreshCircleView() {
+    fileprivate func refreshCircleView() {
         self.arrangedSubviews.forEach { view in view.removeFromSuperview() }
         
         for _ in 0...(self.length - 1) {
@@ -101,8 +102,8 @@ final class ProgressStackView: UIStackView {
         self.refreshProgress()
     }
     
-    private func refreshProgress() {
-        self.arrangedSubviews.enumerate().forEach { (index: Int, view: UIView) in
+    fileprivate func refreshProgress() {
+        self.arrangedSubviews.enumerated().forEach { (index: Int, view: UIView) in
             guard let circleView = view as? CircleView else { return }
             
             circleView.fill = (self.progress > index)

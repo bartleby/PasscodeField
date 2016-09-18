@@ -36,7 +36,7 @@ final class CircleView: UIView {
         }
     }
     
-    private let fillView = UIView(frame: CGRectZero)
+    fileprivate let fillView = UIView(frame: CGRect.zero)
     
     // MARK: - Initializers
     
@@ -45,7 +45,7 @@ final class CircleView: UIView {
         self.fillSize = fillSize
         self.fillColor = fillColor
         
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         
         self.commonInit()
         self.setupView()
@@ -57,7 +57,7 @@ final class CircleView: UIView {
     
     // MARK: - LifeCycle
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         if !self.fill {
             let line = UIBezierPath()
             
@@ -65,8 +65,8 @@ final class CircleView: UIView {
             let y  = self.bounds.height / 2
             let width = self.fillView.bounds.width
             
-            line.moveToPoint(CGPointMake(x, y));
-            line.addLineToPoint(CGPointMake(x + width, y));
+            line.move(to: CGPoint(x: x, y: y));
+            line.addLine(to: CGPoint(x: x + width, y: y));
             line.lineWidth = self.borderHeight
             
             self.fillColor.setStroke()
@@ -74,16 +74,16 @@ final class CircleView: UIView {
         }
     }
     
-    override func intrinsicContentSize() -> CGSize {
-        return CGSizeMake(self.fillSize, self.fillSize)
+    override var intrinsicContentSize : CGSize {
+        return CGSize(width: self.fillSize, height: self.fillSize)
     }
     
     override func updateConstraints() {
-        NSLayoutConstraint.activateConstraints([
-            self.fillView.topAnchor.constraintEqualToAnchor(self.topAnchor),
-            self.fillView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor),
-            self.fillView.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor),
-            self.fillView.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor),
+        NSLayoutConstraint.activate([
+            self.fillView.topAnchor.constraint(equalTo: self.topAnchor),
+            self.fillView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            self.fillView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.fillView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             ])
         
         super.updateConstraints()
@@ -97,14 +97,14 @@ final class CircleView: UIView {
     
     // MARK: - Private Methods
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         
         self.fillView.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func setupView() {
+    fileprivate func setupView() {
         self.addSubview(self.fillView)
         
         self.refreshFillView()
@@ -113,13 +113,13 @@ final class CircleView: UIView {
     
     // MARK: - Helpers
     
-    private func refreshFillColor() {
+    fileprivate func refreshFillColor() {
         self.fillView.backgroundColor = self.fillColor
         self.setNeedsDisplay()
     }
     
-    private func refreshFillView() {
-        self.fillView.hidden = !self.fill
+    fileprivate func refreshFillView() {
+        self.fillView.isHidden = !self.fill
     }
     
 }
